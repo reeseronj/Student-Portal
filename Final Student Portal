@@ -546,14 +546,14 @@
         }
 
         // Simple authentication (would be backend in real system)
-        if (username === 'student' && password === 'student123') {
+        if (username === 'joshuareyes' && password === '123123') {
             document.getElementById('login-page').style.display = 'none';
             document.getElementById('student-dashboard').style.display = 'block';
             document.getElementById('student-name').textContent = username;
-            document.getElementById('display-name').textContent = "John Doe";
-            document.getElementById('display-student-id').textContent = "2023-0001";
-            document.getElementById('display-email').textContent = "john.doe@adfc.edu";
-        } else if (username === 'admin' && password === 'admin123') {
+            document.getElementById('display-name').textContent = "Joshua Reyes";
+            document.getElementById('display-student-id').textContent = "2";
+            document.getElementById('display-email').textContent = "joshuareyes@gmail.com";
+        } else if (username === 'admin' && password === '123123') {
             document.getElementById('login-page').style.display = 'none';
             document.getElementById('admin-dashboard').style.display = 'block';
         } else {
