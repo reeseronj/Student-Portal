@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Portal - Asian Development Foundation College</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/api/placeholder/16/16" alt="favicon">
+    <!-- Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- end of bootstrap -->
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/1.0.0/css/themify-icons.css" rel="stylesheet">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+        body { 
+            background-image: url('adfc_background.jpg') !important; 
+            background-size: cover !important; 
+            background-attachment: fixed !important; 
+            position: relative !important; 
+            background-repeat: no-repeat !important; 
+            padding: 0px !important;
+            font-family: Arial, sans-serif;
+        }
+        body:after {
+            content: '';
+            position: fixed;
+            background-color: rgba(255,255,255,0.8);
+            width: 100%;
+            height: 100vh;
+            top:0px;
+            bottom: 0px;
+            left:0px;
+            right:0px;
+            z-index: 1;
+        }
+        .img-logo{
+            height: 70 px;
+            width: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+        a {
+            color: #1e549f;
+            text-decoration: none;
+        }
+        a:hover,
+        a:focus {
+            text-decoration: underline;
+        }
+        .my-form-container {
+            background-color: #fff;
+            float:left;
+            width: 100%;
+            position: relative;
+            padding: 60px 50px 60px 20px;
+        }
+
+        .my-form-container .my-form-inner-container {
+            position: relative;
+            z-index: 2;
+        }
+        .my-form-container:before {
+            content: '';
+            position: absolute;
+            display: inline-block;
+            width: 130%; 
+            transform: skew(-10deg);
+            -webkit-transform: skew(-10deg);
+            -moz-transform: skew(-10deg);
+            top:-2px;
+            left:-60px;
+            bottom:-2px; 
+            background-color:#fff;
+            z-index: 1;
+        } 
+        .my-form-container h2 { 
+            color: #1e549f; 
+            font-family: 'Anton', 'Arial Black', sans-serif;
+            font-size: 50px;
+        } 
+        .logo-container {
+            padding: 20px 30px;
+            background-color: rgba(0,0,0,0.2);
+        }
+        .logo-container .img-logo {
+           height:auto;
+           width:auto;
+           max-height:70px;
+           max-width: 100%;
+        }
+        .flex-container {
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center; 
+            position: relative;
+            z-index: 3;
+            width: 100%;
+        }
+
+        .flex-container .row-inner-container {
+            box-shadow: 0px -1px 29px -2px rgba(0,0,0,0.2);
+            -webkit-box-shadow: 0px -1px 29px -2px rgba(0,0,0,0.2);
+            -moz-box-shadow: 0px -1px 29px -2px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .my-form-row {
+            background-color: rgba(0,0,0,1);
+            background-image: url('adfc_background.jpg') !important; 
+            background-size: 70% 100% !important;  
+            background-position: -100px bottom !important;  
+            position: relative !important; 
+            background-repeat: no-repeat !important; 
+        }
+
+        .my-form-container .btn-primary {
+            color: #fff;
+            background-color: #1e549f;
+            border-color: #1e549f;
+        }
+        .my-form-container .btn-primary:hover,
+        .my-form-container .btn-primary:focus { 
+            background-color: #164285 !important;
+            border-color: #164285 !important;
+        }
+
+        .my-col {
+            padding-left:0px;
+            padding-right:0px;
+        }
+
+        /* Student Dashboard Styles */
+        .dashboard-container {
+            width: 90%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav {
+            background-color: #1e549f;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: 20px;
+        }
+
+        .grades-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .grades-table th, .grades-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .grades-table th {
+            background-color: #f2f2f2;
+        }
+
+        /*/ Custom, iPhone Retina / */
+        @media only screen and (min-width : 320px), (max-width: 320px) {
+            .flex-container {
+                padding: 10px;
+                display: block;
+            }
+            .my-form-container { 
+                padding: 30px 20px 30px 20px;
+            }
+            .my-form-row { 
+                background-size: 150% auto !important;  
+                background-position: left top !important;   
+            } 
+            .my-form-container h2 {  
+                font-size: 40px;
+            } 
+            .logo-container {
+                padding: 15px 15px;
+                margin-bottom: 70px;
+            }
+            .logo-container .img-logo { 
+               max-height:50px;
+               max-width: 100%;
+            }
+        }  
+
+        /* / Extra Small Devices, Phones / */
+        @media only screen and (min-width : 480px) {
+            
+        }
+
+        /* / Small Devices, Tablets /*/
+        @media only screen and (min-width : 768px) {
+            .my-form-container h2 {  
+                font-size: 50px;
+            } 
+            .logo-container {
+                padding: 20px 15px;
+                margin-bottom: 100px;
+            }
+            .logo-container .img-logo { 
+               max-height:70px;
+               max-width: 100%;
+            }
+            .my-form-row { 
+                background-size: 100% auto !important;  
+                background-position: left top !important;   
+            } 
+        }
+
+        /*/ Medium Devices, Desktops /*/
+        @media only screen and (min-width : 992px) {
+            .flex-container {
+                padding: 0px;
+                display: flex;
+            }
+            .my-form-container { 
+                padding: 60px 50px 60px 20px;
+            }
+            .my-form-row { 
+                background-size: 70% 100% !important;  
+                background-position: -100px bottom !important;   
+            } 
+            .logo-container {
+                padding: 20px 30px;
+                margin-bottom: 0px;
+            }
+            .logo-container .img-logo { 
+               max-height:70px;
+               max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body id="sign-in">
+     
+<div class="preloader" style="display: none;">
+    <div class="loader_img"><img src="adfc_logo.png" alt="loading..." height="64" width="64" style="display: none;"></div>
+</div>
+
+<!-- Login Page -->
+<div id="login-page" class="flex-container">
+    <div class="container"> 
+        <div class="row row-inner-container"> 
+            <div class="col-md-12">
+                <div class="row my-form-row">
+                    <div class="col-md-6 my-col"> 
+                        <div class="logo-container">
+                            <img class="img-logo" src="adfc_logo.png" alt="Asian Development Foundation College logo">
+                        </div> 
+                    </div>
+                    <div class="col-md-6 my-col">
+                        <div class="my-form-container">
+                            <div class="my-form-inner-container">
+                                <div class="panel-header">
+                                    <h2 class="text-center">
+                                       STUDENT PORTAL
+                                    </h2> 
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h3 style="font-weight: bold;margin-bottom: 20px;">Sign In</h3>
+                                            <form id="authentication" method="post" class="login_validator">
+                                                <div class="form-group mb-3">
+                                                    <label for="username" class="sr-only">Student ID</label>  
+                                                    <input required type="text" class="form-control form-control-lg" id="username" name="username" placeholder="Username">
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label for="password" class="sr-only">Password</label>
+                                                    <input required type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password">
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <button class="btn btn-primary btn-block btn-lg w-100" type="button" onclick="login()">Login</button>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <a href="#" id="forgot" class="forgot">Forgot Password?</a>
+                                                <span class="float-end sign-up">New? <a href="#" onclick="showRegister()">Register</a></span>
+                                            </form>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <br><br>
+                                            <p class="text-center">By using this service, you understood and agree to the <a href="#" target="_blank">ADFC Online Services Terms of Use and Privacy Statement</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div> 
+        </div>  
+        <div class="row">  
+            <div class="col-md-12"> 
+                <p style="margin: 10px 0px"><a href="#"><small>← Back to Homepage</small></a></p>
+            </div>
+        </div> 
+    </div> 
+</div>
+
+<!-- Registration Page -->
+<div id="register-page" class="flex-container" style="display:none;">
+    <div class="container"> 
+        <div class="row row-inner-container"> 
+            <div class="col-md-12">
+                <div class="row my-form-row">
+                    <div class="col-md-6 my-col"> 
+                        <div class="logo-container">
+                            <img class="img-logo" src="adfc_logo.png" alt="Asian Development Foundation College logo">
+                        </div> 
+                    </div>
+                    <div class="col-md-6 my-col">
+                        <div class="my-form-container">
+                            <div class="my-form-inner-container">
+                                <div class="panel-header">
+                                    <h2 class="text-center">
+                                       REGISTRATION
+                                    </h2> 
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h3 style="font-weight: bold;margin-bottom: 20px;">Student Registration</h3>
+                                            <form id="registration-form" class="login_validator">
+                                                <div class="form-group mb-3">
+                                                    <input type="text" class="form-control form-control-lg" placeholder="Full Name" id="reg-name" required>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <input type="text" class="form-control form-control-lg" placeholder="Student ID" id="reg-id" required>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <input type="email" class="form-control form-control-lg" placeholder="Email" id="reg-email" required>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <input type="password" class="form-control form-control-lg" placeholder="Create Password" id="reg-password" required>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <input type="password" class="form-control form-control-lg" placeholder="Confirm Password" id="confirm-password" required>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <button class="btn btn-primary btn-block btn-lg w-100" type="button" onclick="register()">Register</button>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <p class="text-center">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div> 
+</div>
+
+<!-- Student Dashboard -->
+<div id="student-dashboard" style="display:none;">
+    <div class="dashboard-container">
+        <div class="nav">
+            <span>Welcome, <span id="student-name">Student</span></span>
+            <button class="btn btn-light" onclick="logout()">Logout</button>
+        </div>
+        <div class="student-dashboard">
+            <h2>Student Information Dashboard</h2>
+            
+            <h3 class="mt-4">Academic Details</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p><strong>Full Name:</strong> <span id="display-name">-</span></p>
+                            <p><strong>Student ID:</strong> <span id="display-student-id">-</span></p>
+                            <p><strong>Email:</strong> <span id="display-email">-</span></p>
+                            <p><strong>Program:</strong> DIP-IT 2nd Year</p>
+                            <p><strong>Semester:</strong> 2nd</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="mt-4">Current Grades</h3>
+            <div class="table-responsive">
+                <table class="grades-table table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ITP222L</td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td>ITP221L</td>
+                            <td>1.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="mt-4">Class Schedule</h3>
+            <div class="table-responsive">
+                <table class="grades-table table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Instructor</th>
+                            <th>Day</th>
+                            <th>Time</th>
+                            <th>Room</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ITP222L</td>
+                            <td>Dennis Gresola</td>
+                            <td>Friday</td>
+                            <td>05:00 - 06:30</td>
+                            <td>Lab 2</td>
+                        </tr>
+                        <tr>
+                            <td>ITP222L</td>
+                            <td>Dennis Gresola</td>
+                            <td>Saturday</td>
+                            <td>05:00 - 06:30</td>
+                            <td>Lab 2</td>
+                        </tr>
+                        <tr>
+                            <td>ITP221L</td>
+                            <td>Rodulfu Puyat</td>
+                            <td>Tuesday</td>
+                            <td>08:30 - 10:00</td>
+                            <td>Lab 3</td>
+                        </tr>
+                        <tr>
+                            <td>ITP221L</td>
+                            <td>Rodulfu Puyat</td>
+                            <td>Thursday</td>
+                            <td>08:30 - 10:00</td>
+                            <td>Lab 3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Dashboard -->
+<div id="admin-dashboard" style="display:none;">
+    <div class="dashboard-container">
+        <div class="nav">
+            <span>Admin Control Panel</span>
+            <button class="btn btn-light" onclick="logout()">Logout</button>
+        </div>
+        <div class="admin-dashboard">
+            <h2>Student Management</h2>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h3>Update Student Grades</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="Student ID" id="admin-student-id">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="Course" id="admin-course">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="New Grade" id="admin-grade">
+                            </div>
+                            <button class="btn btn-primary" onclick="updateGrade()">Update Grade</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h3>Modify Class Schedule</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="Student ID" id="admin-schedule-id">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="Day" id="admin-day">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="Time" id="admin-time">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="Course" id="admin-schedule-course">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" placeholder="Room" id="admin-room">
+                            </div>
+                            <button class="btn btn-primary" onclick="updateSchedule()">Update Schedule</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Page Navigation Functions
+    function showLogin() {
+        document.getElementById('login-page').style.display = 'flex';
+        document.getElementById('register-page').style.display = 'none';
+        document.getElementById('student-dashboard').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'none';
+    }
+
+    function showRegister() {
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('register-page').style.display = 'flex';
+        document.getElementById('student-dashboard').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'none';
+    }
+
+    // Authentication Functions
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (!username || !password) {
+            alert('Please enter both username and password');
+            return;
+        }
+
+        // Simple authentication (would be backend in real system)
+        if (username === 'joshuareyes' && password === '123123') {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('student-dashboard').style.display = 'block';
+            document.getElementById('student-name').textContent = username;
+            document.getElementById('display-name').textContent = "Joshua Reyes";
+            document.getElementById('display-student-id').textContent = "2";
+            document.getElementById('display-email').textContent = "joshuareyes@gmail.com";
+        } else if (username === 'admin' && password === '123123') {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('admin-dashboard').style.display = 'block';
+        } else {
+            alert('Invalid Credentials');
+        }
+    }
+
+    function register() {
+        const name = document.getElementById('reg-name').value;
+        const studentId = document.getElementById('reg-id').value;
+        const email = document.getElementById('reg-email').value;
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        // Validation checks
+        if (!name || !studentId || !email || !password || !confirmPassword) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        // Success - proceed to student dashboard
+        document.getElementById('register-page').style.display = 'none';
+        document.getElementById('student-dashboard').style.display = 'block';
+        
+        // Display registered information on dashboard
+        document.getElementById('student-name').textContent = name;
+        document.getElementById('display-name').textContent = name;
+        document.getElementById('display-student-id').textContent = studentId;
+        document.getElementById('display-email').textContent = email;
+    }
+
+    function logout() {
+        document.getElementById('student-dashboard').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'none';
+        document.getElementById('login-page').style.display = 'flex';
+        
+        // Clear form fields
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }
+
+    function updateGrade() {
+        const studentId = document.getElementById('admin-student-id').value;
+        const course = document.getElementById('admin-course').value;
+        const grade = document.getElementById('admin-grade').value;
+        
+        if (!studentId || !course || !grade) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        alert('Grade Updated Successfully');
+    }
+
+    function updateSchedule() {
+        const studentId = document.getElementById('admin-schedule-id').value;
+        const day = document.getElementById('admin-day').value;
+        const time = document.getElementById('admin-time').value;
+        const course = document.getElementById('admin-schedule-course').value;
+        const room = document.getElementById('admin-room').value;
+        
+        if (!studentId || !day || !time || !course || !room) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        alert('Schedule Updated Successfully');
+    }
+</script>
+</body>
+</html>
