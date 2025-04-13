@@ -1,0 +1,170 @@
+-- Database: adfc_student_portal
+
+-- Users Table (for authentication)
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL, -- Should be hashed in production
+    email VARCHAR(100) UNIQUE NOT NULL,
+    role ENUM('student', 'admin', 'faculty') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL
+);
+
+-- Students Table
+CREATE TABLE students (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    student_number VARCHAR(20) UNIQUE NOT NULL, -- ID shown on the portal
+    program VARCHAR(100) NOT NULL,
+    year_level INT NOT NULL,
+    semester INT NOT NULL,
+    date_of_birth DATE NULL,
+    contact_number VARCHAR(20) NULL,
+    address TEXT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Courses Table
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_code VARCHAR(20) UNIQUE NOT NULL, -- e.g., ITP222L
+    course_name VARCHAR(100) NOT NULL,
+    description TEXT NULL,
+    units DECIMAL(3,1) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Faculty Table
+CREATE TABLE faculty (
+    faculty_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    department VARCHAR(100) NULL,
+    position VARCHAR(100) NULL,
+    contact_number VARCHAR(20) NULL,
+    email VARCHAR(100) NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
+);
+
+-- Rooms Table
+CREATE TABLE rooms (
+    room_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_name VARCHAR(50) UNIQUE NOT NULL, -- e.g., Lab 2
+    building VARCHAR(50) NULL,
+    capacity INT NULL,
+    room_type ENUM('laboratory', 'lecture', 'conference', 'other') NOT NULL DEFAULT 'lecture'
+);
+
+-- Class Schedules Table
+CREATE TABLE class_schedules (
+    schedule_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    faculty_id INT NOT NULL,
+    room_id INT NOT NULL,
+    day_of_week ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    semester INT NOT NULL,
+    academic_year VARCHAR(20) NOT NULL, -- e.g., 2024-2025
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) ON DELETE CASCADE,
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE CASCADE
+);
+
+-- Student Course Enrollment
+CREATE TABLE enrollments (
+    enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    schedule_id INT NOT NULL,
+    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('active', 'dropped', 'completed', 'incomplete') NOT NULL DEFAULT 'active',
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    FOREIGN KEY (schedule_id) REFERENCES class_schedules(schedule_id) ON DELETE CASCADE,
+    UNIQUE KEY (student_id, course_id, schedule_id) -- Prevent duplicate enrollments
+);
+
+-- Grades Table
+CREATE TABLE grades (
+    grade_id INT PRIMARY KEY AUTO_INCREMENT,
+    enrollment_id INT NOT NULL,
+    numeric_grade DECIMAL(5,2) NOT NULL, -- e.g., 00.1
+    letter_grade VARCHAR(5) NULL,
+    semester INT NOT NULL,
+    academic_year VARCHAR(20) NOT NULL,
+    date_recorded TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    recorded_by INT NULL, -- user_id of the admin who recorded the grade
+    FOREIGN KEY (enrollment_id) REFERENCES enrollments(enrollment_id) ON DELETE CASCADE,
+    FOREIGN KEY (recorded_by) REFERENCES users(user_id) ON DELETE SET NULL
+);
+
+-- Password Reset Requests (for "Forgot Password" function)
+CREATE TABLE password_reset_requests (
+    request_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expires_at TIMESTAMP NOT NULL,
+    used BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- User Session Logs
+CREATE TABLE session_logs (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    logout_time TIMESTAMP NULL,
+    ip_address VARCHAR(45) NULL,
+    user_agent TEXT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Sample Data for Testing
+
+-- Insert sample users
+INSERT INTO users (username, password, email, role) VALUES 
+('joshuareyes', '$2y$10$encrypted_password_hash', 'joshuareyes@gmail.com', 'student'),
+('admin', '$2y$10$encrypted_password_hash', 'admin@adfc.edu', 'admin'),
+('dgresola', '$2y$10$encrypted_password_hash', 'dgresola@adfc.edu', 'faculty'),
+('rpuyat', '$2y$10$encrypted_password_hash', 'rpuyat@adfc.edu', 'faculty');
+
+-- Insert sample students
+INSERT INTO students (user_id, full_name, student_number, program, year_level, semester) VALUES 
+(1, 'Joshua Reyes', '2', 'DIP-IT', 2, 2);
+
+-- Insert sample faculty
+INSERT INTO faculty (user_id, full_name, department) VALUES 
+(3, 'Dennis Gresola', 'Information Technology'),
+(4, 'Rodulfu Puyat', 'Information Technology');
+
+-- Insert sample courses
+INSERT INTO courses (course_code, course_name, units) VALUES 
+('ITP222L', 'Advanced Web Development Laboratory', 3.0),
+('ITP221L', 'Database Management Systems Laboratory', 3.0);
+
+-- Insert sample rooms
+INSERT INTO rooms (room_name, room_type) VALUES 
+('Lab 2', 'laboratory'),
+('Lab 3', 'laboratory');
+
+-- Insert sample class schedules
+INSERT INTO class_schedules (course_id, faculty_id, room_id, day_of_week, start_time, end_time, semester, academic_year) VALUES 
+(1, 1, 1, 'Friday', '17:00:00', '18:30:00', 2, '2024-2025'),
+(1, 1, 1, 'Saturday', '17:00:00', '18:30:00', 2, '2024-2025'),
+(2, 2, 2, 'Tuesday', '08:30:00', '10:00:00', 2, '2024-2025'),
+(2, 2, 2, 'Thursday', '08:30:00', '10:00:00', 2, '2024-2025');
+
+-- Insert sample enrollments
+INSERT INTO enrollments (student_id, course_id, schedule_id, status) VALUES 
+(1, 1, 1, 'active'),
+(1, 1, 2, 'active'),
+(1, 2, 3, 'active'),
+(1, 2, 4, 'active');
+
+-- Insert sample grades
+INSERT INTO grades (enrollment_id, numeric_grade, semester, academic_year) VALUES 
+(1, 00.1, 2, '2024-2025'),
+(3, 00.1, 2, '2024-2025');
